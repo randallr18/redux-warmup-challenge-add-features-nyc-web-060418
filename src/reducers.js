@@ -1,10 +1,18 @@
 import { combineReducers } from 'redux';
-import { FETCH_PAINTINGS, SELECT_ACTIVE_PAINTING } from './actions/types';
+import { FETCH_PAINTINGS, SELECT_ACTIVE_PAINTING, DELETE_PAINTING, All_MUSEUMS, DC_MUSEUMS } from './actions/types';
+// import artworks from '../data/artworks';
+
 
 const paintingsReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_PAINTINGS:
       return [...action.payload];
+    case DELETE_PAINTING:
+      return state.filter(painting => painting.id !== action.id)
+    case All_MUSEUMS:
+      return [...action.payload]
+    case DC_MUSEUMS:
+      return state.filter(painting => painting.museum.name === 'National Gallery of Art, Washington D.C.')
     default:
       return state;
   }
@@ -19,9 +27,19 @@ const activePaintingIdReducer = (state = null, action) => {
   }
 };
 
+// const deletePainting = (state = [], action) => {
+//   switch (action.type) {
+//     case DELETE_PAINTING:
+//       return state.filter(painting => painting.id !== action.id);
+//     default:
+//       return state;
+//   }
+// };
+
 const rootReducer = combineReducers({
   paintings: paintingsReducer,
   activePaintingId: activePaintingIdReducer
+  // updatedPaintins: deletePainting
 });
 
 // NOTE:

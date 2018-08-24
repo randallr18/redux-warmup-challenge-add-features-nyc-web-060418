@@ -13,6 +13,7 @@ class PaintingContainer extends Component {
     // We'll still use the lifecycle method
     // so we can easily add async later
     this.props.fetchPaintings();
+    this.props.selectPainting(1)
   }
 
   render() {
